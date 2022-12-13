@@ -38,15 +38,15 @@ $(PROD_OTA_PACKAGE_TARGET): $(BRO)
 
 $(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 		build/tools/releasetools/ota_from_target_files
-	@echo "hentai production: $@"
+	@echo "phoenix production: $@"
 	    $(OTA_FROM_TARGET_FILES) --verbose \
 	    --block \
 	    -p $(OUT_DIR)/host/linux-x86 \
 	    -k $(KEY_CERT_PAIR) \
 	    $(SIGNED_TARGET_FILES_PACKAGE) $@
 
-.PHONY: hentai-prod
-hentai-prod: $(PROD_OTA_PACKAGE_TARGET)
+.PHONY: phoenix-prod
+phoenix-prod: $(PROD_OTA_PACKAGE_TARGET)
 
 ifneq ($(PREVIOUS_TARGET_FILES_PACKAGE),)
 
@@ -58,7 +58,7 @@ $(INCREMENTAL_OTA_PACKAGE_TARGET): $(BRO)
 
 $(INCREMENTAL_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 		build/tools/releasetools/ota_from_target_files
-	@echo "hentai incremental production: $@"
+	@echo "phoenix incremental production: $@"
 	    $(OTA_FROM_TARGET_FILES) --verbose \
 	    --block \
 	    -p $(OUT_DIR)/host/linux-x86 \

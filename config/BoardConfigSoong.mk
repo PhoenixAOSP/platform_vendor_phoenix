@@ -15,23 +15,23 @@ EXPORT_TO_SOONG := \
 # Documentation here:
 # https://github.com/LineageOS/android_build_soong/commit/8328367c44085b948c003116c0ed74a047237a69
 
-SOONG_CONFIG_NAMESPACES += hentaiVarsPlugin
+SOONG_CONFIG_NAMESPACES += phoenixVarsPlugin
 
-SOONG_CONFIG_hentaiVarsPlugin :=
+SOONG_CONFIG_phoenixVarsPlugin :=
 
 define addVar
-  SOONG_CONFIG_hentaiVarsPlugin += $(1)
-  SOONG_CONFIG_hentaiVarsPlugin_$(1) := $$(subst ",\",$$($1))
+  SOONG_CONFIG_phoenixVarsPlugin += $(1)
+  SOONG_CONFIG_phoenixVarsPlugin_$(1) := $$(subst ",\",$$($1))
 endef
 
 $(foreach v,$(EXPORT_TO_SOONG),$(eval $(call addVar,$(v))))
 
-SOONG_CONFIG_NAMESPACES += hentaiGlobalVars
-SOONG_CONFIG_hentaiGlobalVars += \
+SOONG_CONFIG_NAMESPACES += phoenixGlobalVars
+SOONG_CONFIG_phoenixGlobalVars += \
     target_surfaceflinger_fod_lib
 
 # Set default values
 TARGET_SURFACEFLINGER_FOD_LIB ?= surfaceflinger_fod_lib
 
 # Soong value variables
-SOONG_CONFIG_hentaiGlobalVars_target_surfaceflinger_fod_lib := $(TARGET_SURFACEFLINGER_FOD_LIB)
+SOONG_CONFIG_phoenixGlobalVars_target_surfaceflinger_fod_lib := $(TARGET_SURFACEFLINGER_FOD_LIB)

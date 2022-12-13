@@ -1,7 +1,7 @@
 soong_config_module_type {
     name: "surfaceflinger_fod_lib",
     module_type: "cc_defaults",
-    config_namespace: "hentaiGlobalVars",
+    config_namespace: "phoenixGlobalVars",
     value_variables: ["target_surfaceflinger_fod_lib"],
     properties: [
         "cppflags",

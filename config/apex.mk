@@ -21,7 +21,7 @@ MAINLINE_INCLUDE_UWB_MODULE ?= true
 MAINLINE_INCLUDE_WIFI_MODULE ?= true
 
 # Networkstack certificate
-PRODUCT_MAINLINE_SEPOLICY_DEV_CERTIFICATES := vendor/hentai/apex/NetworkStack
+PRODUCT_MAINLINE_SEPOLICY_DEV_CERTIFICATES := vendor/phoenix/apex/NetworkStack
 
 # Prebuilt module SDKs require prebuilt modules to work, and currently
 # prebuilt modules are only provided for com.google.android.xxx.
@@ -30,7 +30,7 @@ DISABLE_DEXPREOPT_CHECK := true
 
 # Enable Google Play system updates support
 PRODUCT_SOONG_NAMESPACES += \
-    vendor/hentai/apex
+    vendor/phoenix/apex
 
 # ModuleMetadata
 PRODUCT_PACKAGES += \

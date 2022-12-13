@@ -16,9 +16,9 @@ VENDOR=**** FILL IN VENDOR NAME ****
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
-HENTAI_ROOT="${MY_DIR}/../../.."
+PHOENIX_ROOT="${MY_DIR}/../../.."
 
-HELPER="${HENTAI_ROOT}/vendor/hentai/build/tools/extract_utils.sh"
+HELPER="${PHOENIX_ROOT}/vendor/phoenix/build/tools/extract_utils.sh"
 if [ ! -f "${HELPER}" ]; then
     echo "Unable to find helper script at ${HELPER}"
     exit 1
@@ -73,7 +73,7 @@ function blob_fixup() {
 }
 
 # Initialize the helper
-setup_vendor "${DEVICE}" "${VENDOR}" "${HENTAI_ROOT}" false "${CLEAN_VENDOR}"
+setup_vendor "${DEVICE}" "${VENDOR}" "${PHOENIX_ROOT}" false "${CLEAN_VENDOR}"
 
 extract "${MY_DIR}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
 

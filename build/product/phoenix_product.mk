@@ -17,8 +17,8 @@
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
-# Inherit hentai products.
-$(call inherit-product, vendor/hentai/config/common_telephony.mk)
+# Inherit phoenix products.
+$(call inherit-product, vendor/phoenix/config/common_telephony.mk)
 
 # Includes all AOSP product packages
 $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_product.mk)

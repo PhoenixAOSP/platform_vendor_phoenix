@@ -16,7 +16,7 @@
  */
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hentai.android.overlay.hentaiconfig">
+    package="com.phoenix.android.overlay.phoenixconfig">
     <overlay android:isStatic="true" android:priority="10" android:targetPackage="android"/>
 
     <application android:hasCode="false"/>

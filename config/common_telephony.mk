@@ -202,7 +202,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Include Carrier Runtime Configuration
 PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/hentai/CarrierSettings/overlay
+    vendor/phoenix/CarrierSettings/overlay
 
 # Inherit from common config now.
-$(call inherit-product, vendor/hentai/config/common.mk)
+$(call inherit-product, vendor/phoenix/config/common.mk)

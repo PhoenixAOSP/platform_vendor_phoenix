@@ -39,7 +39,7 @@ trap cleanup 0
 #
 # $1: device name
 # $2: vendor name
-# $3: Hentai root directory
+# $3: Phoenix root directory
 # $4: is common device - optional, default to false
 # $5: cleanup - optional, default to true
 # $6: custom vendor makefile name - optional, default to false
@@ -60,15 +60,15 @@ function setup_vendor() {
         exit 1
     fi
 
-    export HENTAI_ROOT="$3"
-    if [ ! -d "$HENTAI_ROOT" ]; then
-        echo "\$HENTAI_ROOT must be set and valid before including this script!"
+    export PHOENIX_ROOT="$3"
+    if [ ! -d "$PHOENIX_ROOT" ]; then
+        echo "\$PHOENIX_ROOT must be set and valid before including this script!"
         exit 1
     fi
 
     export OUTDIR=vendor/"$VENDOR"/"$DEVICE"
-    if [ ! -d "$HENTAI_ROOT/$OUTDIR" ]; then
-        mkdir -p "$HENTAI_ROOT/$OUTDIR"
+    if [ ! -d "$PHOENIX_ROOT/$OUTDIR" ]; then
+        mkdir -p "$PHOENIX_ROOT/$OUTDIR"
     fi
 
     VNDNAME="$6"
@@ -76,10 +76,10 @@ function setup_vendor() {
         VNDNAME="$DEVICE"
     fi
 
-    export PRODUCTMK="$HENTAI_ROOT"/"$OUTDIR"/"$VNDNAME"-vendor.mk
-    export ANDROIDBP="$HENTAI_ROOT"/"$OUTDIR"/Android.bp
-    export ANDROIDMK="$HENTAI_ROOT"/"$OUTDIR"/Android.mk
-    export BOARDMK="$HENTAI_ROOT"/"$OUTDIR"/BoardConfigVendor.mk
+    export PRODUCTMK="$PHOENIX_ROOT"/"$OUTDIR"/"$VNDNAME"-vendor.mk
+    export ANDROIDBP="$PHOENIX_ROOT"/"$OUTDIR"/Android.bp
+    export ANDROIDMK="$PHOENIX_ROOT"/"$OUTDIR"/Android.mk
+    export BOARDMK="$PHOENIX_ROOT"/"$OUTDIR"/BoardConfigVendor.mk
 
     if [ "$4" == "true" ] || [ "$4" == "1" ]; then
         COMMON=1
@@ -95,8 +95,8 @@ function setup_vendor() {
         VENDOR_RADIO_STATE=0
     fi
 
-    export BINARIES_LOCATION="$HENTAI_ROOT"/prebuilts/extract-tools/${HOST}-x86/bin
-    export JARS_LOCATION="$HENTAI_ROOT"/prebuilts/extract-tools/common/smali
+    export BINARIES_LOCATION="$PHOENIX_ROOT"/prebuilts/extract-tools/${HOST}-x86/bin
+    export JARS_LOCATION="$PHOENIX_ROOT"/prebuilts/extract-tools/common/smali
 
     export SIMG2IMG="$BINARIES_LOCATION"/simg2img
     export LPUNPACK="$BINARIES_LOCATION"/lpunpack
@@ -1104,7 +1104,7 @@ function get_file() {
 # Convert apk|jar .odex in the corresposing classes.dex
 #
 function oat2dex() {
-    local HENTAI_TARGET="$1"
+    local PHOENIX_TARGET="$1"
     local OEM_TARGET="$2"
     local SRC="$3"
     local TARGET=
@@ -1140,11 +1140,11 @@ function oat2dex() {
         FULLY_DEODEXED=1 && return 0 # system is fully deodexed, return
     fi
 
-    if [ ! -f "$HENTAI_TARGET" ]; then
+    if [ ! -f "$PHOENIX_TARGET" ]; then
         return;
     fi
 
-    if grep "classes.dex" "$HENTAI_TARGET" >/dev/null; then
+    if grep "classes.dex" "$PHOENIX_TARGET" >/dev/null; then
         return 0 # target apk|jar is already odexed, return
     fi
 
@@ -1172,7 +1172,7 @@ function oat2dex() {
                 java -jar "$BAKSMALIJAR" deodex -o "$TMPDIR/dexout" -b "$BOOTOAT" -d "$TMPDIR" "$TMPDIR/$(basename "$OAT")"
                 java -jar "$SMALIJAR" assemble "$TMPDIR/dexout" -o "$TMPDIR/classes.dex"
             fi
-        elif [[ "$HENTAI_TARGET" =~ .jar$ ]]; then
+        elif [[ "$PHOENIX_TARGET" =~ .jar$ ]]; then
             JAROAT="$TMPDIR/system/framework/$ARCH/boot-$(basename ${OEM_TARGET%.*}).oat"
             JARVDEX="/system/framework/boot-$(basename ${OEM_TARGET%.*}).vdex"
             if [ ! -f "$JAROAT" ]; then
@@ -1367,7 +1367,7 @@ function extract() {
     local FIXUP_HASHLIST=( ${PRODUCT_COPY_FILES_FIXUP_HASHES[@]} ${PRODUCT_PACKAGES_FIXUP_HASHES[@]} )
     local PRODUCT_COPY_FILES_COUNT=${#PRODUCT_COPY_FILES_LIST[@]}
     local COUNT=${#FILELIST[@]}
-    local OUTPUT_ROOT="$HENTAI_ROOT"/"$OUTDIR"/proprietary
+    local OUTPUT_ROOT="$PHOENIX_ROOT"/"$OUTDIR"/proprietary
     local OUTPUT_TMP="$TMPDIR"/"$OUTDIR"/proprietary
 
     if [ "$SRC" = "adb" ]; then
@@ -1390,7 +1390,7 @@ function extract() {
 
             # Extract A/B OTA
             if [ -a "$DUMPDIR"/payload.bin ]; then
-                python3 "$HENTAI_ROOT"/vendor/hentai/build/tools/extract_ota.py "$DUMPDIR"/payload.bin -o "$DUMPDIR" -p "system" "odm" "product" "system_ext" "vendor" 2>&1
+                python3 "$PHOENIX_ROOT"/vendor/phoenix/build/tools/extract_ota.py "$DUMPDIR"/payload.bin -o "$DUMPDIR" -p "system" "odm" "product" "system_ext" "vendor" 2>&1
             fi
 
             for PARTITION in "system" "odm" "product" "system_ext" "vendor"
@@ -1403,7 +1403,7 @@ function extract() {
                 fi
                 if [ -a "$DUMPDIR"/"$PARTITION".new.dat ]; then
                     echo "Converting "$PARTITION".new.dat to "$PARTITION".img"
-                    python "$HENTAI_ROOT"/vendor/hentai/build/tools/sdat2img.py "$DUMPDIR"/"$PARTITION".transfer.list "$DUMPDIR"/"$PARTITION".new.dat "$DUMPDIR"/"$PARTITION".img 2>&1
+                    python "$PHOENIX_ROOT"/vendor/phoenix/build/tools/sdat2img.py "$DUMPDIR"/"$PARTITION".transfer.list "$DUMPDIR"/"$PARTITION".new.dat "$DUMPDIR"/"$PARTITION".img 2>&1
                     rm -rf "$DUMPDIR"/"$PARTITION".new.dat "$DUMPDIR"/"$PARTITION"
                     mkdir "$DUMPDIR"/"$PARTITION" "$DUMPDIR"/tmp
                     extract_img_data "$DUMPDIR"/"$PARTITION".img "$DUMPDIR"/"$PARTITION"/
@@ -1621,7 +1621,7 @@ function extract_firmware() {
     local FILELIST=( ${PRODUCT_COPY_FILES_LIST[@]} )
     local COUNT=${#FILELIST[@]}
     local SRC="$2"
-    local OUTPUT_DIR="$HENTAI_ROOT"/"$OUTDIR"/radio
+    local OUTPUT_DIR="$PHOENIX_ROOT"/"$OUTDIR"/radio
 
     if [ "$VENDOR_RADIO_STATE" -eq "0" ]; then
         echo "Cleaning firmware output directory ($OUTPUT_DIR).."
