@@ -70,6 +70,9 @@ PRODUCT_PACKAGE_OVERLAYS += \
 # Inherit from lewdboratory config
 $(call inherit-product-if-exists, vendor/lewdboratory/packages.mk)
 
+# Inherit from PhoenixLabs config
+$(call inherit-product-if-exists, vendor/phoenixlabs/config.mk)
+
 # Inherit from apex config
 $(call inherit-product, vendor/phoenix/config/apex.mk)
 
