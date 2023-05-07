@@ -20,9 +20,9 @@ BUILD_ID_LC ?= $(shell echo $(BUILD_ID) | tr '[:upper:]' '[:lower:]')
 PLATFORM_PHOENIX_RELEASE := Tangelo
 
 ifeq ($(TARGET_BUILD_VARIANT),user)
-    PROD_VERSION += $(TARGET_PRODUCT)-$(PLATFORM_PHOENIX_RELEASE)-ota-$(BUILD_ID_LC)-Furry.$(shell date +%m%d%H%M)
+    PROD_VERSION += $(TARGET_PRODUCT)-$(PLATFORM_PHOENIX_RELEASE)-ota-$(BUILD_ID_LC).$(shell date +%m%d%H%M)
 else
-    PROD_VERSION += $(TARGET_PRODUCT)-$(PLATFORM_PHOENIX_RELEASE)-ota-$(BUILD_ID_LC)-INT.$(shell date +%m%d%H%M)
+    PROD_VERSION += $(TARGET_PRODUCT)-$(PLATFORM_PHOENIX_RELEASE)-ota-$(BUILD_ID_LC)-DEBUG.$(shell date +%m%d%H%M)
 endif
 
 $(call inherit-product-if-exists, vendor/phoenix/build/target/product/security/phoenix_security.mk)
