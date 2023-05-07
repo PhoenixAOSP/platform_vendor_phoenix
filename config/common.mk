@@ -67,9 +67,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGE_OVERLAYS += \
     vendor/phoenix/overlay
 
-# Inherit from lewdboratory config
-$(call inherit-product-if-exists, vendor/lewdboratory/packages.mk)
-
 # Inherit from PhoenixLabs config
 $(call inherit-product-if-exists, vendor/phoenixlabs/config.mk)
 
