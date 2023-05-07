@@ -48,6 +48,24 @@ $(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 .PHONY: phoenix-prod
 phoenix-prod: $(PROD_OTA_PACKAGE_TARGET)
 
+name := $(TARGET_PRODUCT)
+ifeq ($(TARGET_BUILD_TYPE),debug)
+  name := $(name)_debug
+endif
+name := signed-$(name)-img-$(FILE_NAME_TAG)
+
+PROD_UPDATE_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
+
+$(PROD_UPDATE_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
+                build/tools/releasetools/img_from_target_files
+	@echo "Phoenix updatepackage: $@"
+	    $(IMG_FROM_TARGET_FILES) \
+	        --additional IMAGES/VerifiedBootParams.textproto:VerifiedBootParams.textproto \
+	        $(SIGNED_TARGET_FILES_PACKAGE) $@
+
+.PHONY: phoenix-updatepackage
+phoenix-updatepackage: $(PROD_UPDATE_PACKAGE_TARGET)
+
 ifneq ($(PREVIOUS_TARGET_FILES_PACKAGE),)
 
 INCREMENTAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/incremental-$(PROD_VERSION).zip
