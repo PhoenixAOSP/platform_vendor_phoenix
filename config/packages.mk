@@ -16,4 +16,5 @@
 
 PRODUCT_PACKAGES += \
     Updater \
+    ThemePicker \
     RepainterServicePriv
