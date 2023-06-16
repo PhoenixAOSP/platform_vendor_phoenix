@@ -16,5 +16,6 @@
 
 PRODUCT_PACKAGES += \
     Updater \
-    ThemePicker \
+    PhoenixThemePicker \
+    PhoenixColorStub \
     RepainterServicePriv
