@@ -85,6 +85,9 @@ $(call inherit-product, vendor/phoenix/config/gfonts.mk)
 # Inherit from packages config
 $(call inherit-product, vendor/phoenix/config/packages.mk)
 
+# Inherit from properties config
+$(call inherit-product, vendor/phoenix/config/properties.mk)
+
 # Inherit from fonts config
 $(call inherit-product, vendor/phoenix/config/fonts.mk)
 
