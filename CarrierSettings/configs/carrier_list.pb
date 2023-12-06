@@ -32,10 +32,6 @@ enreach_nl
 *
 truphone_zz
 20404"547275554B3030656E
-
-
-sasktel_ca
-20404"5A
 '
 
 verizon_us
@@ -152,9 +148,6 @@ tmobile_nl
 %
 20601IMSI=2060188
 206012060188
-
-	iijmio_jp
-20601IIJ
 &
 20601SPN=IUSACELL
 20601IUSACELL
@@ -667,6 +660,10 @@ $
 lycamobile_ro
 22616
 Lycamobile
+
+
+fastweb_it
+22801FASTWEB
 
 swisscom_ch
 22801
@@ -801,8 +798,8 @@ $
 
 23415GID1=70
 23415"70
-
-23415GID1=A0
+
+asda_gb
 23415"A0
 
 23415GID1=B3
@@ -1346,8 +1343,8 @@ $
 lycamobile_de
 26243
 Lycamobile
-
-google5gsalab_us
+
+google5glab_us
 262830
 
 google5glab_us
@@ -1615,6 +1612,10 @@ Lycamobile
 
 302660
 302660
+
+
+sasktel_ca
+302681
 
 rogers5g_ca
 302720"A4
@@ -1646,10 +1647,14 @@ tbaytel_ca
 
 u264a_ca
 302760"F1
+
+
+sasktel_ca
+302780"5A
 
 
 sasktel_ca
-302780
+302781
 (
 310000SPN=BLUEWIRE
 310000BLUEWIRE
@@ -2566,6 +2571,9 @@ xfinity_us
 )
 spectrum_us
 311480"BA01490000000000
+$
+cox_us
+311480"BA01570000000000
 (
 
 visible_us
@@ -4079,14 +4087,14 @@ cheers2_in
 
 41903
 41903
-
-41904
+
+stc_kw
 41904
 
 stc_sa
 42001
-
-42003
+
+	mobily_sa
 42003
 
 42004
@@ -5715,4 +5723,4 @@ Lycamobile
 90158
 
 verizononsitelte_us
-999480Ïëí¡º"¶üö¢
+999480ÕÿØþ½"ÌøÑ¦

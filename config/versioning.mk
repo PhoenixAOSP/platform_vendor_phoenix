@@ -17,7 +17,7 @@
 
 BUILD_ID_LC ?= $(shell echo $(BUILD_ID) | tr '[:upper:]' '[:lower:]')
 
-PLATFORM_PHOENIX_RELEASE := Tangelo
+PLATFORM_PHOENIX_RELEASE := Ultranex
 
 ifeq ($(TARGET_BUILD_VARIANT),user)
     PROD_VERSION += $(TARGET_PRODUCT)-$(PLATFORM_PHOENIX_RELEASE)-ota-$(BUILD_ID_LC).$(shell date +%m%d%H%M)
